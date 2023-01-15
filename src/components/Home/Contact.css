@@ -1,0 +1,37 @@
+.contact-container{
+    background-color: #222222;
+    min-height: 92vh;
+}
+.contact-heading h1{
+    font-weight: 900;
+    color: #fff;
+    font-size: 58px;
+    text-align: center;
+}
+.contact-heading p{
+    color: #fff;
+    text-align: center;
+}
+.contact-heading span{
+    color: #ffb400;
+}
+.form-control{
+    border: 1px solid #444444;
+}
+.form-control:valid {
+    background-color:  #333333!important;
+    color: #fff;
+}
+.wrapper{
+    position: relative;
+}
+.wrapper input, textarea{
+    text-indent: 30px;
+}
+.icon{
+    position: absolute;
+    top: 12px;
+    left: 25px;
+    color: #444444;
+}
+

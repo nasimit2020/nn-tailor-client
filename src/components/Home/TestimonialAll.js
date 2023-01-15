@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Swiper, SwiperSlide} from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -29,11 +29,13 @@ const TestimonialAll = () => {
                     clickable: true,
                 }}
                 modules={[Autoplay, Pagination, Navigation]}
-                className="mySwiper"
+                className="bg-info"
             >
-                {
-                    testimonials.map( testimonial => <SwiperSlide><Testimonial testimonial={testimonial}></Testimonial></SwiperSlide>)
-                }
+                
+                    {
+                        testimonials.map(testimonial => <SwiperSlide><Testimonial testimonial={testimonial}></Testimonial></SwiperSlide>)
+                    }
+                
             </Swiper>
         </>
     );
