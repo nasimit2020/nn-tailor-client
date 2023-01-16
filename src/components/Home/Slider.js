@@ -20,6 +20,7 @@ const Slider = () => {
                     delay: 2500,
                     disableOnInteraction: false,
                 }}
+                loop={true}
                 parallax={true}
                 pagination={{
                     clickable: true,
