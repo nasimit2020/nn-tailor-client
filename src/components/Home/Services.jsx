@@ -3,6 +3,7 @@ import Ladies from '../../assets/images/ladies.jpg';
 import Baby from '../../assets/images/baby.jpg';
 import Boy from '../../assets/images/boy.jpg';
 import Resizing from '../../assets/images/Resizing.jpg';
+import { Link } from 'react-router-dom';
 
 const services = [
     { id: 1, serviceName: 'Ladies Dress', img: Ladies },
@@ -19,10 +20,12 @@ const Services = () => {
             <div class="grid grid-cols-4 gap-4">
                 {
                     services.map(service => (
-                        <div className='text-center'>
-                            <img src={service.img} alt="" className='w-full h-48 rounded-xl' />
-                            <h6 className='text-xl py-2 font-medium'>{service.serviceName}</h6>
-                        </div>
+                        <Link to={`/serviceDetails/${service.serviceName}`}>
+                            <div className='text-center'>
+                                <img src={service.img} alt="" className='w-full h-48 rounded-xl' />
+                                <h6 className='text-xl py-2 font-medium'>{service.serviceName}</h6>
+                            </div>
+                        </Link>
                     ))
                 }
             </div>
