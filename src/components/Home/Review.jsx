@@ -29,8 +29,6 @@ const Review = () => {
                 }}
                 loop={true}
                 modules={[Autoplay]}
-                onSlideChange={() => console.log('slide change')}
-                onSwiper={(swiper) => console.log(swiper)}
             >
 
                 {
@@ -51,7 +49,6 @@ const Review = () => {
                         </SwiperSlide>
                     ))
                 }
-
             </Swiper >
         </div >
     );

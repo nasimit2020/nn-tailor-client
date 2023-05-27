@@ -42,7 +42,7 @@ const router = createBrowserRouter([
       },
       {
         path: "serviceDetails/:Id",
-        element: <ServiceDetails></ServiceDetails>
+        element: <ServiceDetails></ServiceDetails>,
       },
       {
         path: "/login",
@@ -50,6 +50,7 @@ const router = createBrowserRouter([
       }
     ]
   },
+  
   
 ]);
 
