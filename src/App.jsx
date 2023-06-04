@@ -12,7 +12,8 @@ import About from './components/About/About';
 import Shop from './components/Shop/Shop';
 import Contact from './components/Home/Contact';
 import ServiceDetails from './components/ServiceDetails/ServiceDetails';
-
+import Admin from './components/Dashboard/Admin';
+import AllUser from './components/Dashboard/AllUser';
 
 const router = createBrowserRouter([
   {
@@ -50,7 +51,16 @@ const router = createBrowserRouter([
       }
     ]
   },
-  
+  {
+    path: '/dashboard',
+    element: <Admin></Admin>,
+    children: [
+      {
+        path: 'user',
+        element: <AllUser></AllUser>
+      }
+    ]
+  }  
   
 ]);
 
@@ -58,9 +68,7 @@ function App() {
 
 
   return (
-    <>
       <RouterProvider router={router} />
-    </>
   )
 }
 

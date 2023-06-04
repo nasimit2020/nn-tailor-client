@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { BsGoogle } from "react-icons/bs";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import auth from '../../firebase/firebase_config';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/UserContext';
 
 const Login = () => {
-    const [loggedInUser, setLoggedInUser] = useState();
-    console.log(loggedInUser);
+    const [loggedInUser, setLoggedInUser] = useContext(AuthContext);
     const provider = new GoogleAuthProvider();
+    const navigate = useNavigate();
 
     const SignInWithGooglePopUp = async () => {
-        
        await signInWithPopup(auth, provider)
             .then((result) => {
                 // This gives you a Google Access Token. You can use it to access the Google API.
@@ -19,7 +20,9 @@ const Login = () => {
                 const user = result.user;
                 // IdP data available using getAdditionalUserInfo(result)
                 // ...
+                console.log(user);
                 setLoggedInUser(user)
+                navigate('/dashboard/user')
             }).catch((error) => {
                 // Handle Errors here.
                 const errorCode = error.code;
