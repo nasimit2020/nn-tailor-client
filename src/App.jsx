@@ -11,9 +11,10 @@ import Services from './components/Home/Services';
 import About from './components/About/About';
 import Shop from './components/Shop/Shop';
 import Contact from './components/Home/Contact';
-import ServiceDetails from './components/ServiceDetails/ServiceDetails';
+import OrderDetails from './components/ServiceDetails/OrderDetails';
 import Admin from './components/Dashboard/Admin';
 import AllUser from './components/Dashboard/AllUser';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -42,33 +43,32 @@ const router = createBrowserRouter([
         element: <Contact></Contact>
       },
       {
-        path: "serviceDetails/:Id",
-        element: <ServiceDetails></ServiceDetails>,
+        path: "OrderDetails/:Id",
+        element: <PrivateRoute><OrderDetails></OrderDetails></PrivateRoute>,
       },
       {
         path: "/login",
         element: <Login></Login>
-      }
+      },
+
     ]
   },
   {
     path: '/dashboard',
-    element: <Admin></Admin>,
+    element: <PrivateRoute><Admin></Admin></PrivateRoute>,
     children: [
       {
         path: 'user',
         element: <AllUser></AllUser>
       }
     ]
-  }  
-  
+  }
+
 ]);
 
 function App() {
-
-
   return (
-      <RouterProvider router={router} />
+    <RouterProvider router={router} />
   )
 }
 

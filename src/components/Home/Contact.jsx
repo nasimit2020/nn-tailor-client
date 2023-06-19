@@ -14,7 +14,7 @@ const Contact = () => {
                     </div>
                 </div>
                 <div className=''>
-                    <img src={ServiceRequest} alt="" srcset="" className='mt-[-150px]' />
+                    <img src={ServiceRequest} alt="" srcSet="" className='mt-[-150px]' />
                 </div>
             </div>
         </div>

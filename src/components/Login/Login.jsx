@@ -1,14 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { BsGoogle } from "react-icons/bs";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import auth from '../../firebase/firebase_config';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/UserContext';
 
 const Login = () => {
     const [loggedInUser, setLoggedInUser] = useContext(AuthContext);
     const provider = new GoogleAuthProvider();
     const navigate = useNavigate();
+
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const SignInWithGooglePopUp = async () => {
        await signInWithPopup(auth, provider)
@@ -20,9 +23,9 @@ const Login = () => {
                 const user = result.user;
                 // IdP data available using getAdditionalUserInfo(result)
                 // ...
-                console.log(user);
+                
                 setLoggedInUser(user)
-                navigate('/dashboard/user')
+                navigate(from, {replace: true})
             }).catch((error) => {
                 // Handle Errors here.
                 const errorCode = error.code;
