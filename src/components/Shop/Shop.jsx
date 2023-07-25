@@ -3,6 +3,7 @@ import ClothStore from '../../assets/images/shop.jpg';
 import { Link } from 'react-router-dom';
 
 const Shop = () => {
+    
     return (
         <div className="hero min-h-screen bg-base-200 lg:px-28 sm:px-12">
             <div className="hero-content flex-col lg:flex-row">

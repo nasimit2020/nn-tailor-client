@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { AuthContext } from '../../contexts/UserContext';
+import React  from 'react';
+import { Link} from 'react-router-dom';
+import { useAuthState, useSignOut } from 'react-firebase-hooks/auth';
+import auth from '../../firebase/firebase_config';
 
 const Navbar = () => {
     const menu = <>
@@ -11,10 +12,10 @@ const Navbar = () => {
         <li><Link to="contact">Contact</Link></li>
 
     </>
-    const [loggedInUser, setLoggedInUser] = useContext(AuthContext);
-    const signOut = () => {
-        setLoggedInUser(null)
-    }
+    
+    const [user, loading, error] = useAuthState(auth);
+    const [signOut] = useSignOut(auth);
+    
     return (
         <div className="navbar bg-base-100 lg:px-32 sm:px-12">
             <div className="navbar-start">
@@ -34,10 +35,10 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                {loggedInUser ?
+                {user ?
                     <div>
                         <ul className="menu menu-horizontal">
-                            <Link to="/login" className="px-3 text-error" onClick={() => signOut()} >SighOut</Link>
+                            <Link to="/" className="px-3 text-error" onClick={() => signOut()} >SighOut</Link>
                             <Link to="dashboard" className='text-accent'>Dashboard</Link>
                         </ul>
                     </div>

@@ -1,16 +1,17 @@
-import React, { useContext } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
-import { AuthContext } from '../../contexts/UserContext';
+import React from 'react';
+import { Navigate, redirect, useLocation } from 'react-router-dom';
+import auth from '../../firebase/firebase_config';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const PrivateRoute = ({ children }) => {
-    const [loggedInUser, setLoggedInUser, loading] = useContext(AuthContext);
+    const [user, loading, error] = useAuthState(auth);
     const location = useLocation();
 
-    if (loggedInUser && loggedInUser.uid) {
+    if (user) {
         return children;
     }
-
-    return <Navigate to='/login' state={{ from: location }} replace> </Navigate>;
+      
+    return <Navigate to='/login' state={{ from: location }} replace /> ;
 };
 
 export default PrivateRoute;

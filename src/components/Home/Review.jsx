@@ -33,7 +33,9 @@ const Review = () => {
 
                 {
                     reviewSection.map(rev => (
-                        <SwiperSlide>
+                        <SwiperSlide
+                        key={rev.name}
+                        >
                             <div className="hero border-l-8 border-l-indigo-500">
                                 <div className="hero-content flex-col lg:flex-row-reverse">
                                     <img src={rev.img} className="max-w-sm rounded-lg shadow-2xl" />

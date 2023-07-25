@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
-import { AuthContext } from '../../contexts/UserContext';
+import { useLoaderData } from 'react-router-dom';
 
 const About = () => {
-    const [loggedInUser, setLoggedInUser] = useContext(AuthContext)
+    
     return (
         <div>
-            {loggedInUser?.displayName}
-            About
+            Service Name
+            
         </div>
     );
 };
