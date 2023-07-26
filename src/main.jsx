@@ -35,14 +35,14 @@ const router = createBrowserRouter([
         element: <Home></Home>,
         loader: async () =>{
           return fetch('http://localhost:5000/addService')
-        }
+        },
       },
       {
         path: "services",
         element: <Services></Services>,
         loader: async () =>{
           return fetch('http://localhost:5000/addService')
-        }
+        },
       },
       {
         path: "about",
@@ -57,19 +57,20 @@ const router = createBrowserRouter([
         element: <Contact></Contact>
       },
       {
+        path: "/login",
+        element: <Login></Login>
+      },
+      {
         path: "OrderDetails/:Id",
         element: <PrivateRoute><OrderDetails></OrderDetails></PrivateRoute>,
         loader: async ({params}) =>{
           return fetch(`http://localhost:5000/addService/${params.Id}`)
         },
-      },
-      {
-        path: "/login",
-        element: <Login></Login>
-      },
+      }
 
     ]
   },
+  
   {
     path: '/dashboard',
     element:<PrivateRoute><Admin></Admin></PrivateRoute>,

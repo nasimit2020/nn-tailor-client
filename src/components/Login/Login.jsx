@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsGoogle } from "react-icons/bs";
 import auth from '../../firebase/firebase_config';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { redirect, useLocation, useNavigate } from 'react-router-dom';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 
 const Login = () => {
@@ -11,7 +11,10 @@ const Login = () => {
     
     let from = location.state?.from?.pathname || '/';
 
-    
+    if(user){
+        navigate(from, {replace: true})
+    }
+
 
     return (
         <div className='h-72 place-content-center grid bg-teal-50'>

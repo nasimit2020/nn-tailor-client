@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import auth from '../../firebase/firebase_config';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate, useRouteLoaderData } from 'react-router-dom';
 
 const OrderDetails = () => {
     const [user, loading, error] = useAuthState(auth);
@@ -35,7 +35,7 @@ const OrderDetails = () => {
         .then(res => res.json())
         .then(data => console.log(data))
         reset();
-        navigate('/');
+        navigate('/dashboard');
     };
 
     
