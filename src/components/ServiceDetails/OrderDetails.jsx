@@ -1,18 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useForm } from "react-hook-form";
-import auth from '../../firebase/firebase_config';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useLoaderData, useNavigate, useRouteLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProviders';
 
 const OrderDetails = () => {
-    const [user, loading, error] = useAuthState(auth);
-    const name = useLoaderData();
+    const {user} = useContext(AuthContext);
+    const checkOutItem = useLoaderData();
     const navigate = useNavigate();
 
-    if(loading){
-        return <p>Loading...</p>
-    }
-    
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
     const onSubmit = data => {
         const order= {
@@ -48,8 +44,8 @@ const OrderDetails = () => {
             </div>
             <div className='grid gap-4 grid-cols-2 justify-items-center'>
                 <div>
-                    <h4 className=''>Service Name : <span className='text-success text-2xl'></span></h4>
-                    <h4 className=''>Price : <span className='text-success text-2xl'> Tk. </span></h4>
+                    <h4 className=''>Service Name : <span className='text-success text-2xl'>{checkOutItem?.name}</span></h4>
+                    <h4 className=''>Price : <span className='text-success text-2xl'> Tk. {checkOutItem?.price}</span></h4>
                     {/* <img src={url.url} alt="" className='w-48 h-48 rounded'/> */}
                 </div>
                 <div>

@@ -23,6 +23,7 @@ import ReviewSubmit from './components/Dashboard/ReviewSubmit';
 import Book from './components/Dashboard/Book';
 import BookingList from './components/Dashboard/BookingList';
 import Payment from './components/Dashboard/Payment';
+import AuthProviders from './providers/AuthProviders';
 
 const router = createBrowserRouter([
   {
@@ -33,14 +34,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: async () =>{
+        loader: async () => {
           return fetch('http://localhost:5000/addService')
         },
       },
       {
         path: "services",
         element: <Services></Services>,
-        loader: async () =>{
+        loader: async () => {
           return fetch('http://localhost:5000/addService')
         },
       },
@@ -63,17 +64,17 @@ const router = createBrowserRouter([
       {
         path: "OrderDetails/:Id",
         element: <PrivateRoute><OrderDetails></OrderDetails></PrivateRoute>,
-        loader: async ({params}) =>{
+        loader: async ({ params }) => {
           return fetch(`http://localhost:5000/addService/${params.Id}`)
         },
       }
 
     ]
   },
-  
+
   {
     path: '/dashboard',
-    element:<PrivateRoute><Admin></Admin></PrivateRoute>,
+    element: <PrivateRoute><Admin></Admin></PrivateRoute>,
     children: [
       {
         path: 'order',
@@ -90,21 +91,21 @@ const router = createBrowserRouter([
       {
         path: 'book',
         element: <Book></Book>,
-        loader: async () =>{
+        loader: async () => {
           return fetch('http://localhost:5000/orderList')
-        }, 
+        },
       },
       {
         path: 'book/payment/:id',
         element: <Payment></Payment>,
-        loader: async ({params}) =>{
-          return  fetch(`http://localhost:5000/book/payment/${params.id}`)
+        loader: async ({ params }) => {
+          return fetch(`http://localhost:5000/book/payment/${params.id}`)
         }
       },
       {
         path: 'bookingList',
         element: <BookingList></BookingList>,
-        loader: async () =>{
+        loader: async () => {
           return fetch('http://localhost:5000/orderList')
         }
       },
@@ -120,6 +121,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <AuthProviders>
       <RouterProvider router={router} />
+    </AuthProviders>
   </React.StrictMode>,
 )

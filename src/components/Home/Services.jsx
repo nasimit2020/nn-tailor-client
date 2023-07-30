@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Ladies from '../../assets/images/ladies.jpg';
 import Baby from '../../assets/images/baby.jpg';
 import Boy from '../../assets/images/boy.jpg';
 import Resizing from '../../assets/images/Resizing.jpg';
 import { Link, useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProviders';
 
 // const services = [
 //     { id: 1, serviceName: 'Ladies Dress', img: Ladies },
@@ -14,10 +15,11 @@ import { Link, useLoaderData } from 'react-router-dom';
 
 const Services = () => {
     const allServices = useLoaderData();
+    const {user} = useContext(AuthContext)
    
     return (
         <div className='lg:px-32 sm:px-12 py-12'>
-            <h2 className='text-2xl font-medium pb-5'>For Your Dress</h2>
+            <h2 className='text-2xl font-medium pb-5'>For Your Dress {user?.displayName}</h2>
             <div className="grid grid-cols-4 gap-4">
                 {
                     allServices?.map(allService => (

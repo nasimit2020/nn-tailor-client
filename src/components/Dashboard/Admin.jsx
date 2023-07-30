@@ -6,10 +6,11 @@ import { BsPersonAdd } from "react-icons/bs";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
 import auth from '../../firebase/firebase_config';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { AuthContext } from '../../providers/AuthProviders';
 
 
 const Admin = () => {
-    const [user, loading, error] = useAuthState(auth);
+    const {user} = useContext(AuthContext);
     
     return (
         <div className="drawer lg:drawer-open">
