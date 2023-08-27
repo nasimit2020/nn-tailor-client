@@ -3,7 +3,6 @@ import { useLoaderData } from 'react-router-dom';
 
 const Payment = () => {
     const order = useLoaderData();
-    console.log(order);
     const {serviceName, price} = order;
     return (
         <div>

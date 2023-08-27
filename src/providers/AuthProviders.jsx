@@ -8,18 +8,22 @@ const auth = getAuth(app);
 const AuthProviders = ({children}) => {
     const [user, setUser] = useState(null);
     const provider = new GoogleAuthProvider();
+    const [loading, setLoading] = useState(true);
 
     const googleSignIn = () =>{
         return signInWithPopup(auth, provider)
     }
 
     const logOut = () =>{
+        setLoading(true)
+        localStorage.removeItem('tailorAccessToken')
         return signOut(auth)
     }
 
     useEffect(() =>{
         const unsubscribe = onAuthStateChanged(auth, currentUser =>{
             setUser(currentUser);
+            setLoading(false);
         });
         return () =>{
             unsubscribe();
@@ -28,6 +32,7 @@ const AuthProviders = ({children}) => {
 
     const authInfo = {
         user,
+        loading,
         googleSignIn,
         logOut
     }

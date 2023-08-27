@@ -14,19 +14,50 @@ const Login = () => {
 
     let from = location.state?.from?.pathname || '/';
 
-   
 
-    const {googleSignIn} = useContext(AuthContext);
-    const handleSignIn = () =>{
+
+    const { googleSignIn } = useContext(AuthContext);
+    const handleSignIn = () => {
         googleSignIn()
-        .then(result =>{
-            const loggedInUser = result.user;
-            navigate(from, {replace: true})
-        })
-        .catch((error) => {
-            const errorMessage = error.message;
-            console.log(errorMessage);
-          });
+            .then(result => {
+                const loggedInUser = result.user;
+                const loggedInEmail = {
+                    email: loggedInUser.email
+                }
+                const saveUser = {
+                    name: loggedInUser.displayName,
+                    email: loggedInUser.email,
+                    photoURL: loggedInUser.photoURL
+                }
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(loggedInEmail)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('tailorAccessToken', data.token);
+                        fetch('http://localhost:5000/users', {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(saveUser)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                navigate(from, { replace: true })
+                            })
+                    })
+
+
+            })
+            .catch((error) => {
+                const errorMessage = error.message;
+                console.log(errorMessage);
+            });
     }
 
     return (

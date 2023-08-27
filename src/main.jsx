@@ -24,6 +24,9 @@ import Book from './components/Dashboard/Book';
 import BookingList from './components/Dashboard/BookingList';
 import Payment from './components/Dashboard/Payment';
 import AuthProviders from './providers/AuthProviders';
+import UserHome from './components/Dashboard/UserHome';
+import AdminHome from './components/Dashboard/AdminHome';
+import AllServices from './components/Dashboard/AllServices';
 
 const router = createBrowserRouter([
   {
@@ -76,9 +79,40 @@ const router = createBrowserRouter([
     path: '/dashboard',
     element: <PrivateRoute><Admin></Admin></PrivateRoute>,
     children: [
+      // {
+      //   path: '/dashboard',
+      //   element: <AllOrder></AllOrder>,
+      //   loader: async () => {
+      //     return fetch('http://localhost:5000/orderList')
+      //   },
+      // },
+      {
+        path: 'userhome',
+        element: <UserHome></UserHome>
+      },
+      {
+        path: 'adminhome',
+        element: <AdminHome></AdminHome>
+      },
+      {
+        path: 'allServices',
+        element: <AllServices></AllServices>,
+        loader: async () => {
+          return fetch('http://localhost:5000/addService')
+        },
+      }
+      ,
       {
         path: 'order',
-        element: <AllOrder></AllOrder>
+        element: <AllOrder></AllOrder>,
+        loader: async () => {
+          return fetch('http://localhost:5000/orderList', {
+            method: 'GET',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('tailorAccessToken')}`
+            }
+          })
+        },
       },
       {
         path: 'addService',
@@ -86,14 +120,19 @@ const router = createBrowserRouter([
       },
       {
         path: 'admin',
-        element: <AllUser></AllUser>
+        element: <AllUser></AllUser>,
+        loader: async () =>{
+          return fetch('http://localhost:5000/users', {
+            method: 'GET',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('tailorAccessToken')}`
+            }
+          })
+        }
       },
       {
         path: 'book',
         element: <Book></Book>,
-        loader: async () => {
-          return fetch('http://localhost:5000/orderList')
-        },
       },
       {
         path: 'book/payment/:id',
@@ -105,9 +144,6 @@ const router = createBrowserRouter([
       {
         path: 'bookingList',
         element: <BookingList></BookingList>,
-        loader: async () => {
-          return fetch('http://localhost:5000/orderList')
-        }
       },
       {
         path: 'review',

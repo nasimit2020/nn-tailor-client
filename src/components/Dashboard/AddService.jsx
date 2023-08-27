@@ -15,7 +15,6 @@ const AddService = () => {
     const imageHostKey = import.meta.env.VITE_imagebb_key;;
 
     const onSubmit = (data, event) => {
-        event.preventDefault();
         const image = data.image[0];
         const formData = new FormData();
         formData.append('image', image)
@@ -34,7 +33,7 @@ const AddService = () => {
                         details: data.details,
                         url: imgData.data.image
                     }
-                    console.log(service)
+                    
                     fetch('http://localhost:5000/addService', {
                         method: 'POST',
                         headers: {

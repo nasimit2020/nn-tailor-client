@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import Customer1 from '../../assets/images/customer1.jpg'
@@ -15,12 +15,23 @@ const reviewSection = [
 import { Autoplay } from "swiper";
 
 const Review = () => {
+
+    // Reviews Items con't show ui, because the database image problem. So I can show it manually. 
+    const [reviews, setReviews] = useState([])
+
+    useEffect(() =>{
+        fetch('http://localhost:5000/reviews')
+        .then(res => res.json())
+        .then(data => {
+            setReviews(data)
+        })
+    }, [])
+
     return (
         <div className='lg:px-32 sm:px-12 py-12'>
             <p>--- SOME HAPPY FACES</p>
             <h2 className='text-3xl font-semibold pb-12 pt-5'>Real Happy Customers, Real Stories</h2>
             <Swiper
-
                 spaceBetween={50}
                 slidesPerView={1}
                 autoplay={{

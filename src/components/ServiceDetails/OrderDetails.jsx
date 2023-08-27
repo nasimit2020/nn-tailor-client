@@ -16,10 +16,10 @@ const OrderDetails = () => {
             email: data.email,
             phoneNumber: data.number,
             address: data.address,
-            imageUrl: url.url,
-            price: price,
+            imageUrl: checkOutItem.url,
+            price: checkOutItem.price,
             orderDate: new Date(),
-            serviceName: name
+            serviceName: checkOutItem.name
         }
         fetch('http://localhost:5000/order', {
             method: 'POST',
@@ -46,7 +46,7 @@ const OrderDetails = () => {
                 <div>
                     <h4 className=''>Service Name : <span className='text-success text-2xl'>{checkOutItem?.name}</span></h4>
                     <h4 className=''>Price : <span className='text-success text-2xl'> Tk. {checkOutItem?.price}</span></h4>
-                    {/* <img src={url.url} alt="" className='w-48 h-48 rounded'/> */}
+                    <img src={checkOutItem.url} alt="" className='w-48 h-48 rounded'/>
                 </div>
                 <div>
                     <form onSubmit={handleSubmit(onSubmit)} className='border p-5  rounded w-96'>

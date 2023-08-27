@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProviders';
 
 const Book = () => {
-    const orderList = useLoaderData();
-    console.log(orderList);
+    const { user } = useContext(AuthContext);
+    const [orders, setOrders] = useState([])
 
-    
+    useEffect(() => {
+        fetch(`http://localhost:5000/orderList/${user.email}`)
+            .then(res => res.json())
+            .then(data => {
+                setOrders(data);
+            })
+    }, [])
 
     return (
         <div>
@@ -24,7 +31,7 @@ const Book = () => {
                     <tbody>
                         {/* row 1 */}
                         {
-                            orderList?.map( (order, i) => (
+                            orders?.map( (order, i) => (
                                 <tr
                                 key={order._id}
                                 >

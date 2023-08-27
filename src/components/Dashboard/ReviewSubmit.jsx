@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from "react-hook-form"
+import { AuthContext } from '../../providers/AuthProviders';
+import Swal from 'sweetalert2';
 
 const ReviewSubmit = () => {
     const {
@@ -10,19 +12,36 @@ const ReviewSubmit = () => {
         formState: { errors },
     } = useForm()
 
+    const {user} = useContext(AuthContext) 
+    console.log(user);
+
     const onSubmit = (data, event) => {
+        const review = {
+            name: data.name,
+            designation: data.designation,
+            message: data.massage,
+            photoUrl: user.photoURL
+        }
+        fetch('http://localhost:5000/review', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(review)
+        })
+            .then(res => res.json())
+            .then(data => {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Thank you for your review!',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+                  reset()
+            })
+            .catch(er => console.error(er))
         
-        // fetch('http://localhost:5000/addService', {
-        //     method: 'POST',
-        //     headers: {
-        //         'content-type': 'application/json'
-        //     },
-        //     body: JSON.stringify(data)
-        // })
-        //     .then(res => res.json())
-        //     .then(data => console.log(data))
-        //     .catch(er => console.error(er))
-        reset()
     }
     return (
         <div>
