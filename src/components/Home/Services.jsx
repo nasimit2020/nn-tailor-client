@@ -15,18 +15,18 @@ import { AuthContext } from '../../providers/AuthProviders';
 
 const Services = () => {
     const allServices = useLoaderData();
-    const {user} = useContext(AuthContext)
    
     return (
         <div className='lg:px-32 sm:px-12 py-12'>
-            <h2 className='text-2xl font-medium pb-5'>For Your Dress {user?.displayName}</h2>
-            <div className="grid grid-cols-4 gap-4">
+            <h2 className='text-2xl font-medium pb-5'>For Your Dress </h2>
+            <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
                 {
                     allServices?.map(allService => (
                         <Link
                         to={`/OrderDetails/${allService?._id}`}
                         key={allService?._id}
                         >
+                            
                             <div className='text-center'>
                                 <img src={allService?.url?.url} alt="" className='w-full h-48 rounded-xl' />
                                 <h6 className='text-xl py-2 font-medium'>{allService?.name}</h6>

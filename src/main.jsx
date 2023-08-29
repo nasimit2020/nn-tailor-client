@@ -24,8 +24,6 @@ import Book from './components/Dashboard/Book';
 import BookingList from './components/Dashboard/BookingList';
 import Payment from './components/Dashboard/Payment';
 import AuthProviders from './providers/AuthProviders';
-import UserHome from './components/Dashboard/UserHome';
-import AdminHome from './components/Dashboard/AdminHome';
 import AllServices from './components/Dashboard/AllServices';
 
 const router = createBrowserRouter([
@@ -79,21 +77,6 @@ const router = createBrowserRouter([
     path: '/dashboard',
     element: <PrivateRoute><Admin></Admin></PrivateRoute>,
     children: [
-      // {
-      //   path: '/dashboard',
-      //   element: <AllOrder></AllOrder>,
-      //   loader: async () => {
-      //     return fetch('http://localhost:5000/orderList')
-      //   },
-      // },
-      {
-        path: 'userhome',
-        element: <UserHome></UserHome>
-      },
-      {
-        path: 'adminhome',
-        element: <AdminHome></AdminHome>
-      },
       {
         path: 'allServices',
         element: <AllServices></AllServices>,
